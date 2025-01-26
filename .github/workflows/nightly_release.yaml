@@ -1,0 +1,35 @@
+# 每个 main 分支上的 push 和 PR 都会触发这个 workflow，以生成一个 nightly 版本供测试
+
+name: Nightly Release
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths-ignore: # 文档更新不必触发 CI
+      - "**.md"
+      - "readme/**"
+  push:
+    branches:
+      - main
+    paths-ignore: # 文档更新不必触发 CI
+      - "**.md"
+      - "readme/**"
+
+jobs:
+  calc_short_sha:
+    runs-on: ubuntu-latest
+    outputs:
+      short_sha: ${{ steps.calc.outputs.short_sha }}
+    steps:
+      - uses: actions/checkout@main
+      - id: calc
+        run: echo "short_sha=$(git rev-parse --short HEAD)" | tee -a $GITHUB_OUTPUT
+
+  build:
+    needs: calc_short_sha
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      # 使用短 commit SHA 作为 nightly 版本号
+      version: nightly-${{ needs.calc_short_sha.outputs.short_sha }}

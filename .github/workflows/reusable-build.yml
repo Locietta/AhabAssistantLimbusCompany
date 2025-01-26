@@ -1,3 +1,9 @@
+# 这是个可重用workflow，其他workflow需要执行构建操作时，调用此workflow
+# 用例：
+#   uses: ./.github/workflows/reusable-build.yml
+#   with:
+#     version: V1.0.0 # 构建时注入的版本号
+
 name: Reusable Build
 
 on:
@@ -19,8 +25,9 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12"
+          python-version: "3.13"
           cache: "pip"
+          # 如果 requirements.txt 发生变化，则缓存应当失效
           cache-dependency-path: "requirements.txt"
 
       # 安装依赖
@@ -30,6 +37,7 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
+      # 注入版本号/构建号
       - name: Inject version number
         run: |
           $filePath = "assets/config/version.txt"

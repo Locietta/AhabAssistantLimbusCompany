@@ -1,3 +1,5 @@
+# 当版本标签被推送/在github上手动创建release时触发
+
 name: Release
 
 on:
@@ -10,6 +12,7 @@ jobs:
   build:
     uses: ./.github/workflows/reusable-build.yml
     with:
+      # 使用标签名作为版本号
       version: ${{ github.ref_name }}
 
   release:
