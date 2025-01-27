@@ -1,1 +1,1 @@
-DEFAULT VERSION
+nightly

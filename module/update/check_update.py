@@ -70,8 +70,14 @@ class UpdateThread(QThread):
                 self.updateSignal.emit(UpdateState.SUCCESS)
                 return
 
+            # 如果本地版本是 nightly 版本，则发送成功信号并返回
+            if cfg.version.startswith('nightly'):
+                log.INFO("当前版本是 nightly 版本，不检查更新")
+                self.updateSignal.emit(UpdateState.SUCCESS)
+                return
+
             # 比较当前版本和最新版本，如果最新版本更高，则准备更新
-            if parse(version.lstrip('Vv')) > parse(cfg.version.lstrip('Vv')):
+            if parse(version) > parse(cfg.version):
                 self.title = f"发现新版本：{cfg.version}——> {version}\n更新日志:"
                 self.content = "<style>a {color: #586f50; font-weight: bold;}</style>" + markdown.markdown(content)
                 self.assets_url = assets_url
