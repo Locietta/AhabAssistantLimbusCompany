@@ -1,5 +1,3 @@
-from typing import Union
-
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QIcon, QFont, QAction
 from PySide6.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout, QSizePolicy, QWidget, QGridLayout
@@ -58,7 +56,7 @@ class BaseSettingLayout(QFrame):
 
 
 class BaseCheckBox(BaseLayout):
-    def __init__(self, config_name, icon: Union[str, QIcon, FluentIconBase, None], title, parent=None, center=True,
+    def __init__(self, config_name, icon: str | QIcon | FluentIconBase | None, title, parent=None, center=True,
                  icon_size=16, tips=None):
         super().__init__(parent=parent)
         self.config_name = config_name
@@ -183,7 +181,7 @@ class NormalTextButton(BaseButton):
 
 
 class ToSettingButton(BaseButton):
-    def __init__(self, config_name, icon: Union[str, QIcon, FluentIconBase, None] = FIF.SETTING, parent=None):
+    def __init__(self, config_name, icon: str | QIcon | FluentIconBase | None = FIF.SETTING, parent=None):
         super().__init__(config_name, parent=parent)
 
         self.setFixedHeight(30)
@@ -224,7 +222,7 @@ class ToSettingButton(BaseButton):
 
 
 class ChangePageButton(BaseButton):
-    def __init__(self, config_name, icon: Union[str, QIcon, FluentIconBase, None] = FIF.SETTING, parent=None):
+    def __init__(self, config_name, icon: str | QIcon | FluentIconBase | None = FIF.SETTING, parent=None):
         super().__init__(config_name, parent=parent)
 
         self.setFixedHeight(30)
@@ -249,7 +247,7 @@ class ChangePageButton(BaseButton):
 
 
 class SettingTeamsButton(BaseButton):
-    def __init__(self, config_name, icon: Union[str, QIcon, FluentIconBase, None] = FIF.SETTING, parent=None):
+    def __init__(self, config_name, icon: str | QIcon | FluentIconBase | None = FIF.SETTING, parent=None):
         super().__init__(config_name, parent=parent)
 
         self.setFixedHeight(30)
