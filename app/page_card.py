@@ -65,9 +65,9 @@ class PageCard(QFrame):
             lambda k: self.all_page.setCurrentWidget(self.findChild(QWidget, k)))
 
     def __init_widget(self):
-        self.card_layout.setAlignment(Qt.AlignTop)
-        self.vbox_general.setAlignment(Qt.AlignTop)
-        self.vbox_advanced.setAlignment(Qt.AlignTop)
+        self.card_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.vbox_general.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.vbox_advanced.setAlignment(Qt.AlignmentFlag.AlignTop)
 
     def retranslateUi(self):
         self.pivot.setItemText("general", self.tr("常规设置"))
