@@ -26,7 +26,7 @@ Usage:
     # <div class="figure"><img src="image.jpg" alt="Alt text" tabindex="0" /></div>
 """
 
-from typing import TYPE_CHECKING, Optional, Sequence
+from typing import TYPE_CHECKING, Sequence
 from markdown_it import MarkdownIt
 from markdown_it.rules_core import StateCore
 
@@ -40,7 +40,7 @@ def imgdiv_plugin(
         md: MarkdownIt,
         class_name: str = "image-container",
         focusable: bool = True,
-        align: Optional[str] = None,
+        align: str | None = None,
 ) -> None:
     """
     Plugin to wrap images in div containers.
