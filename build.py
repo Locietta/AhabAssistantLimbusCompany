@@ -123,7 +123,7 @@ def bundle_resources(version: str):
             "a",
             "-mx=7",
             str(archive_path.resolve()),
-            f"{str(aalc_dir.resolve())}{os.sep}*",
+            f"{str(aalc_dir.resolve())}",
         ]
     )
 
