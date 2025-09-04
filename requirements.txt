@@ -17,6 +17,7 @@ numpy==2.2.0
 opencv-python==4.10.0.84
 pillow==11.0.0
 portalocker==2.3.2
+py7zr~=0.22.0
 pyasn1==0.6.1
 pyasn1_modules==0.4.1
 PyAutoGUI==0.9.54
