@@ -29,7 +29,6 @@ dependencies = [
     "cpufeature",
     "psutil",
     "nb-log",
-    "py7zr>=1.0.0",
 ]
 
 [project.urls]
@@ -39,4 +38,7 @@ Issues = "https://github.com/KIYI671/AhabAssistantLimbusCompany/issues"
 
 [tool.uv]
 managed = true
-dev-dependencies = ["pyinstaller", "ruff"]
+dev-dependencies = [
+    "pyinstaller",
+    "ruff",
+]

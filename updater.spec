@@ -1,8 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-
 a = Analysis(
-    ['updater.py'],
+    ["updater.py"],
     pathex=[],
     binaries=[],
     datas=[],
@@ -10,9 +9,11 @@ a = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=['numpy', 'pandas'],
+    excludes=[
+        "numpy",
+        "pandas",
+    ],
     noarchive=False,
-    optimize=0,
 )
 pyz = PYZ(a.pure)
 
@@ -22,7 +23,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='AALC Updater',
+    name="AALC Updater",
     debug=False,
     bootloader_ignore_signals=False,
     strip=True,
@@ -35,5 +36,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['assets\\logo\\Updater.ico'],
+    icon=["assets\\logo\\Updater.ico"],
 )

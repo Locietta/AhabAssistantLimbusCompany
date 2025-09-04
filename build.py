@@ -11,7 +11,6 @@ import subprocess
 import argparse
 import glob
 from pathlib import Path
-import py7zr
 
 import PyInstaller.__main__
 
@@ -53,6 +52,7 @@ def build_executable():
     PyInstaller.__main__.run(
         [
             "updater.spec",
+            "--distpath=./dist/AALC",
             "-y",
         ]
     )
@@ -73,10 +73,10 @@ def bundle_resources(version: str):
     # Ensure AALC directory exists
     aalc_dir.mkdir(exist_ok=True, parents=True)
 
-    # Copy dist contents to aalc_dir
+    # Copy dist contents to dist_release
     dist_dir = Path("dist")
     if dist_dir.exists():
-        shutil.copytree(dist_dir, aalc_dir, dirs_exist_ok=True)
+        shutil.copytree(dist_dir, dist_release_dir, dirs_exist_ok=True)
 
     # Copy 3rdparty
     third_party_src = Path("3rdparty")
@@ -117,19 +117,16 @@ def bundle_resources(version: str):
     print(f"Creating 7z archive: AALC_{version}.7z")
     archive_path = dist_release_dir / f"AALC_{version}.7z"
 
-    with py7zr.SevenZipFile(
-        archive_path,
-        "w",
-        filters=[{"id": py7zr.FILTER_LZMA2, "preset": py7zr.PRESET_DEFAULT}],
-    ) as archive:
-        for item in aalc_dir.rglob("*"):
-            if item.is_file():
-                # Get relative path from aalc_dir
-                rel_path = item.relative_to(aalc_dir)
-                archive_name = f"AALC/{rel_path}"
-                archive.write(item, archive_name)
+    subprocess.run(
+        [
+            "7z",
+            "a",
+            "-mx=7",
+            str(archive_path.resolve()),
+            f"{str(aalc_dir.resolve())}{os.sep}*",
+        ]
+    )
 
-    print(f"Successfully created archive: {archive_path}")
     print(f"Archive size: {archive_path.stat().st_size / (1024 * 1024):.2f} MB")
 
 

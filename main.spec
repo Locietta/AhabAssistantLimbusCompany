@@ -6,7 +6,7 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[],
-    excludes=['3rdparty'],
+    excludes=['3rdparty', 'ruff', 'pyinstaller'],
     noarchive=False,
 )
 
