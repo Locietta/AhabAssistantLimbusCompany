@@ -28,7 +28,6 @@ from PySide6.QtWidgets import QApplication
 # 启用 DPI 缩放
 QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
 QApplication.setAttribute(Qt.ApplicationAttribute.AA_DontCreateNativeWidgetSiblings)
-QApplication.setAttribute(Qt.ApplicationAttribute.AA_UseHighDpiPixmaps)
 
 if __name__ == "__main__":
     # 构建互斥锁
