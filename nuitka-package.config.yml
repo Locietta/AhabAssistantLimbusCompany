@@ -1,0 +1,13 @@
+- module-name: "cpufeature"
+  anti-bloat:
+    - description: "remove test code"
+      replacements_plain:
+        "from cpufeature.test_cpufeature import test": ""
+
+- module-name: "cpufeature.test_cpufeature"
+  anti-bloat:
+    - description: "remove test module"
+      module_code: ""
+
+
+  

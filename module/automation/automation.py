@@ -3,7 +3,6 @@ import gc
 import math
 import random
 import time
-from tkinter import Image
 
 import cv2
 import numpy as np
@@ -145,7 +144,7 @@ class Automation(metaclass=SingletonMeta):
 
         return True
 
-    def take_screenshot(self, gray: bool = True) -> Image:
+    def take_screenshot(self, gray: bool = True):
         """
         截取当前屏幕并返回图像对象。
         Args:

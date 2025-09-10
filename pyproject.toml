@@ -39,4 +39,8 @@ Issues = "https://github.com/KIYI671/AhabAssistantLimbusCompany/issues"
 
 [tool.uv]
 managed = true
-dev-dependencies = ["pyinstaller"]
+dev-dependencies = [
+    "nuitka<=2.7.11",
+    "pip",
+    "pyinstaller",
+]
