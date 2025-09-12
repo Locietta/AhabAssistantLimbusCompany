@@ -19,7 +19,7 @@ from utils.utils import encrypt_string, decrypt_string, get_timezone
 
 
 class CheckBoxWithButton(QFrame):
-    def __init__(self, check_box_name, check_box_title, check_box_icon: Union[str, QIcon, FluentIconBase, None],
+    def __init__(self, check_box_name, check_box_title, check_box_icon: str | QIcon | FluentIconBase | None,
                  button_name, parent=None):
         super().__init__(parent)
         # self.setFixedHeight(80)
@@ -74,7 +74,7 @@ class CheckBoxWithLineEdit(QFrame):
 
 
 class CheckBoxWithComboBox(QFrame):
-    def __init__(self, check_box_name, check_box_title, check_box_icon: Union[str, QIcon, FluentIconBase, None],
+    def __init__(self, check_box_name, check_box_title, check_box_icon: str | QIcon | FluentIconBase | None,
                  combo_box_name, combo_box_width=None, parent=None):
         super().__init__(parent)
         # self.setFixedHeight(80)
@@ -176,7 +176,7 @@ class MirrorSpinBox(QFrame):
 
 class MirrorTeamCombination(QFrame):
     def __init__(self, team_number, check_box_name, check_box_title,
-                 check_box_icon: Union[str, QIcon, FluentIconBase, None],
+                 check_box_icon: str | QIcon | FluentIconBase | None,
                  button_name, parent=None):
         super().__init__(parent)
         self.setObjectName(f"team_{team_number}")
@@ -318,7 +318,7 @@ class MirrorTeamCombination(QFrame):
 
 
 class SinnerSelect(QFrame):
-    def __init__(self, config_name, label_title, check_box_icon: Union[str, QIcon, FluentIconBase, None], sinner_img,
+    def __init__(self, config_name, label_title, check_box_icon: str | QIcon | FluentIconBase | None, sinner_img,
                  parent=None):
         super().__init__(parent)
         self.setObjectName(config_name)
@@ -384,7 +384,7 @@ class SinnerSelect(QFrame):
 class ComboBoxSettingCard(SettingCard):
     valueChanged = Signal()
 
-    def __init__(self, config_name: str, icon: Union[str, QIcon, FluentIconBase], title, content=None, texts=None,
+    def __init__(self, config_name: str, icon: str | QIcon | FluentIconBase, title, content=None, texts=None,
                  parent=None):
         super().__init__(icon, title, content, parent)
         self.config_name = config_name
@@ -456,7 +456,7 @@ class BasePrimaryPushSettingCard(PrimaryPushSettingCard):
 
 
 class PushSettingCardMirrorchyan(SettingCard):
-    def __init__(self, text, icon: Union[str, QIcon, FluentIconBase], title, update_callback, config_name, parent=None):
+    def __init__(self, text, icon: str | QIcon | FluentIconBase, title, update_callback, config_name, parent=None):
         self.config_value = decrypt_string(str(cfg.get_value(config_name)))
         self.update_callback = update_callback
         super().__init__(icon, title, "", parent)
@@ -505,7 +505,7 @@ class SwitchSettingCard(SettingCard):
 
     checkedChanged = Signal(bool)
 
-    def __init__(self, icon: Union[str, QIcon, FluentIconBase], title, content=None, config_name: str = None,
+    def __init__(self, icon: str | QIcon | FluentIconBase, title, content=None, config_name: str = None,
                  parent=None):
         super().__init__(icon, title, content, parent)
         self.config_name = config_name
@@ -541,7 +541,7 @@ class SwitchSettingCard(SettingCard):
 
 class PushSettingCardDate(BasePushSettingCard):
     # clicked = pyqtSignal()
-    def __init__(self, text, icon: Union[str, QIcon, FluentIconBase], title, config_name, parent=None):
+    def __init__(self, text, icon: str | QIcon | FluentIconBase, title, config_name, parent=None):
         self.config_name = config_name
         self.config_value = datetime.datetime.fromtimestamp(cfg.get_value(config_name))
         super().__init__(text, icon, title, self.config_value.strftime('%Y-%m-%d %H:%M'), parent)
@@ -558,7 +558,7 @@ class PushSettingCardDate(BasePushSettingCard):
 
 class PushSettingCardChance(BasePushSettingCard):
 
-    def __init__(self, text, icon: Union[str, QIcon, FluentIconBase], title, content=None, config_name: str = None,
+    def __init__(self, text, icon: str | QIcon | FluentIconBase, title, content=None, config_name: str = None,
                  parent=None):
         super().__init__(text, icon, title, content, parent)
         self.config_name = config_name
