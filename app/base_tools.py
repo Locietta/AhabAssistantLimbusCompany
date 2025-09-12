@@ -20,7 +20,7 @@ class BaseLayout(QFrame):
         # 初始化布局
         self.hBoxLayout.setSpacing(0)
         self.hBoxLayout.setContentsMargins(0, 0, 0, 0)
-        self.hBoxLayout.setAlignment(Qt.AlignCenter)
+        self.hBoxLayout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
 
 class BaseSettingLayout(QFrame):
@@ -67,16 +67,16 @@ class BaseCheckBox(BaseLayout):
         if icon:
             self.iconLabel = SettingIconWidget(icon, self)
             self.iconLabel.setFixedSize(icon_size, icon_size)
-            self.hBoxLayout.addWidget(self.iconLabel, 0, Qt.AlignLeft)
+            self.hBoxLayout.addWidget(self.iconLabel, 0, Qt.AlignmentFlag.AlignLeft)
             self.hBoxLayout.addSpacing(5)
 
         self.check_box_title = title
         self.tips = tips
         self.check_box = CheckBox(title, self)
-        self.hBoxLayout.addWidget(self.check_box, 0, Qt.AlignLeft)
+        self.hBoxLayout.addWidget(self.check_box, 0, Qt.AlignmentFlag.AlignLeft)
         self.hBoxLayout.addSpacing(16)
         if not center:
-            self.hBoxLayout.setAlignment(Qt.AlignLeft)
+            self.hBoxLayout.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         if cfg.get_value(self.config_name) is not None:
             self.check_box.setChecked(cfg.get_value(self.config_name))
@@ -163,8 +163,8 @@ class NormalTextButton(BaseButton):
         self.button = PushButton(button_text, self)
         if tactics == 1:
             self.button.setSizePolicy(
-                QSizePolicy.Expanding,  # 水平方向自动扩展
-                QSizePolicy.Fixed  # 垂直方向固定
+                QSizePolicy.Policy.Expanding,  # 水平方向自动扩展
+                QSizePolicy.Policy.Fixed  # 垂直方向固定
             )
         self.hBoxLayout.addWidget(self.button)
         self.button.clicked.connect(self.clicked)
@@ -273,7 +273,7 @@ class BaseLabel(BaseLayout):
         self.label.setFont(QFont('Microsoft YaHei UI', 12))
         if cfg.zoom_scale != 0:
             self.label.setStyleSheet("font-size: 16px;")
-        self.hBoxLayout.addWidget(self.label, Qt.AlignLeft)
+        self.hBoxLayout.addWidget(self.label, Qt.AlignmentFlag.AlignLeft)
         self.hBoxLayout.setContentsMargins(5, 0, 0, 0)
         self.setFixedHeight(25)
 
@@ -346,7 +346,7 @@ class BaseSpinBox(BaseLayout):
         self.setFixedHeight(50)
         self.spin_box.setMinimum(min_value)
         self.spin_box.setSingleStep(min_step)
-        self.spin_box.setAlignment(Qt.AlignCenter)
+        self.spin_box.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         if cfg.get_value(self.config_name) is not None:
             self.spin_box.setValue(cfg.get_value(self.config_name))

@@ -32,7 +32,7 @@ class MessageBoxHtml(MessageBox):
         self.scrollArea = ScrollArea(self.widget)
         self.scrollArea.setWidgetResizable(True)  # 允许内容扩展
         self.scrollArea.enableTransparentBackground()
-        self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)  # 隐藏水平滚动条
+        self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)  # 隐藏水平滚动条
         self.scrollArea.setWidget(self.contentLabel)  # 将内容标签放入滚动区域
         # 设置 ScrollArea 的最小高度
         self.scrollArea.setMinimumHeight(300)
@@ -41,28 +41,28 @@ class MessageBoxHtml(MessageBox):
 
         self.jumpButton = PrimaryPushButton('跳转', self.buttonGroup)
         self.jumpButton.adjustSize()
-        self.jumpButton.setAttribute(Qt.WA_LayoutUsesWidgetRect)
+        self.jumpButton.setAttribute(Qt.WidgetAttribute.WA_LayoutUsesWidgetRect)
         self.jumpButton.setFocus()
         # self.jumpButton = QPushButton('跳转', parent)
         self.jumpButton.clicked.connect(
             lambda: self.open_url('https://github.com/KIYI671/AhabAssistantLimbusCompany/releases'))
 
         # 调整按钮组的大小策略（关键！）
-        button_policy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        button_policy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         self.buttonGroup.setSizePolicy(button_policy)
         self.buttonGroup.setMinimumWidth(750)  # 保留最小宽度，但移除固定高度
         # self.buttonGroup.setMinimumHeight(500)  # 移除这行！避免固定高度挤压上方空间
 
         # 重新添加控件到布局（调整顺序和拉伸因子）
         # textLayout中滚动区域占满空间（拉伸因子1）
-        self.textLayout.addWidget(self.scrollArea, 0, Qt.AlignTop)
+        self.textLayout.addWidget(self.scrollArea, 0, Qt.AlignmentFlag.AlignTop)
         self.textLayout.setContentsMargins(24, 24, 24, 24)  # 保持边距合理
         self.textLayout.setSpacing(12)  # 保持内边距合理
 
         # buttonLayout中按钮均匀分布（拉伸因子1）
-        self.buttonLayout.addWidget(self.cancelButton, 1, Qt.AlignVCenter)
-        self.buttonLayout.addWidget(self.jumpButton, 1, Qt.AlignVCenter)
-        self.buttonLayout.addWidget(self.yesButton, 1, Qt.AlignVCenter)
+        self.buttonLayout.addWidget(self.cancelButton, 1, Qt.AlignmentFlag.AlignVCenter)
+        self.buttonLayout.addWidget(self.jumpButton, 1, Qt.AlignmentFlag.AlignVCenter)
+        self.buttonLayout.addWidget(self.yesButton, 1, Qt.AlignmentFlag.AlignVCenter)
         self.buttonLayout.setSpacing(12)
         self.buttonLayout.setContentsMargins(24, 24, 24, 24)
 
@@ -100,9 +100,9 @@ class MessageBoxConfirm(MessageBox):
         self.contentLabel.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         FluentStyleSheet.DIALOG.apply(self.contentLabel)
 
-        self.buttonLayout.addWidget(self.cancelButton, 1, Qt.AlignVCenter)
-        self.buttonLayout.addWidget(self.yesButton, 1, Qt.AlignVCenter)
-        self.textLayout.addWidget(self.contentLabel, 0, Qt.AlignTop)
+        self.buttonLayout.addWidget(self.cancelButton, 1, Qt.AlignmentFlag.AlignVCenter)
+        self.buttonLayout.addWidget(self.yesButton, 1, Qt.AlignmentFlag.AlignVCenter)
+        self.textLayout.addWidget(self.contentLabel, 0, Qt.AlignmentFlag.AlignTop)
 
     def open_url(self, url):
         QDesktopServices.openUrl(QUrl(url))
@@ -124,7 +124,7 @@ class MessageBoxEdit(MessageBox):
         self.lineEdit.setText(self.content)
         self.lineEdit.returnPressed.connect(self.yesButton.click)
 
-        self.textLayout.addWidget(self.lineEdit, 0, Qt.AlignTop)
+        self.textLayout.addWidget(self.lineEdit, 0, Qt.AlignmentFlag.AlignTop)
 
         self.buttonGroup.setMinimumWidth(400)
 
@@ -149,12 +149,12 @@ class MessageBoxWarning(MessageBox):
 
 
 class BaseInfoBar(InfoBar):
-    def __init__(self, icon: InfoBarIcon | FluentIconBase | QIcon | str, title: str, content: str, orient=Qt.Horizontal,
+    def __init__(self, icon: InfoBarIcon | FluentIconBase | QIcon | str, title: str, content: str, orient=Qt.Orientation.Horizontal,
                  isClosable=True, duration=1000, position=InfoBarPosition.TOP_RIGHT, parent=None):
         super().__init__(icon, title, content, orient, isClosable, duration, position, parent)
 
     @classmethod
-    def new(cls, icon, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
+    def new(cls, icon, title, content, orient=Qt.Orientation.Horizontal, isClosable=True, duration=1000,
             position=InfoBarPosition.TOP_RIGHT, parent=None):
         w = BaseInfoBar(icon, QCoreApplication.translate("BaseInfoBar", title), QCoreApplication.translate("BaseInfoBar", content), orient,
                         isClosable, duration, position, parent)
@@ -162,22 +162,22 @@ class BaseInfoBar(InfoBar):
         return w
 
     @classmethod
-    def info(cls, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
+    def info(cls, title, content, orient=Qt.Orientation.Horizontal, isClosable=True, duration=1000,
              position=InfoBarPosition.TOP_RIGHT, parent=None):
         return cls.new(InfoBarIcon.INFORMATION, title, content, orient, isClosable, duration, position, parent)
 
     @classmethod
-    def success(cls, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
+    def success(cls, title, content, orient=Qt.Orientation.Horizontal, isClosable=True, duration=1000,
                 position=InfoBarPosition.TOP_RIGHT, parent=None):
         return cls.new(InfoBarIcon.SUCCESS, title, content, orient, isClosable, duration, position, parent)
 
     @classmethod
-    def warning(cls, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
+    def warning(cls, title, content, orient=Qt.Orientation.Horizontal, isClosable=True, duration=1000,
                 position=InfoBarPosition.TOP_RIGHT, parent=None):
         return cls.new(InfoBarIcon.WARNING, title, content, orient, isClosable, duration, position, parent)
 
     @classmethod
-    def error(cls, title, content, orient=Qt.Horizontal, isClosable=True, duration=1000,
+    def error(cls, title, content, orient=Qt.Orientation.Horizontal, isClosable=True, duration=1000,
               position=InfoBarPosition.TOP_RIGHT, parent=None):
         return cls.new(InfoBarIcon.ERROR, title, content, orient, isClosable, duration, position, parent)
 
@@ -272,9 +272,9 @@ class BetterDateTimeEdit(DateTimeEdit):
     def keyPressEvent(self, e: QKeyEvent | None) -> None:
         super().keyPressEvent(e)
         if e is not None:
-            if e.key() == Qt.Key_Up:
+            if e.key() == Qt.Key.Key_Up:
                 self.handle_overflow(True)
-            elif e.key() == Qt.Key_Down:
+            elif e.key() == Qt.Key.Key_Down:
                 self.handle_overflow(False)
 
 
@@ -291,7 +291,7 @@ class MessageBoxDate(MessageBox):
         self.datePicker = BetterDateTimeEdit(self)
         self.datePicker.setDateTime(content)
 
-        self.textLayout.addWidget(self.datePicker, 0, Qt.AlignTop)
+        self.textLayout.addWidget(self.datePicker, 0, Qt.AlignmentFlag.AlignTop)
 
         self.buttonGroup.setMinimumWidth(480)
 
@@ -316,7 +316,7 @@ class MessageBoxSpinbox(MessageBox):
         self.box.setMinimum(0)
         self.box.setMaximum(3)
 
-        self.textLayout.addWidget(self.box, 0, Qt.AlignTop)
+        self.textLayout.addWidget(self.box, 0, Qt.AlignmentFlag.AlignTop)
 
         self.buttonGroup.setMinimumWidth(250)
 

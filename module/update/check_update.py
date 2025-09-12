@@ -294,7 +294,7 @@ def check_update(self, timeout=5, flag=False):
             bar = BaseInfoBar.success(
                 title=QT_TRANSLATE_NOOP("BaseInfoBar", '当前是最新版本(＾∀＾●)'),
                 content="",
-                orient=Qt.Horizontal,
+                orient=Qt.Orientation.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.TOP,
                 duration=1000,
@@ -305,7 +305,7 @@ def check_update(self, timeout=5, flag=False):
             bar = BaseInfoBar.warning(
                 title=QT_TRANSLATE_NOOP("BaseInfoBar", '检测更新失败(╥╯﹏╰╥)'),
                 content=self.update_thread.error_msg,
-                orient=Qt.Horizontal,
+                orient=Qt.Orientation.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.TOP,
                 duration=5000,

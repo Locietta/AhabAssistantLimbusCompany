@@ -30,7 +30,7 @@ class CheckBoxWithButton(QFrame):
         self.button = ChangePageButton(button_name, parent=self)
         self.hBoxLayout.addWidget(self.box)
         self.hBoxLayout.addWidget(self.button)
-        self.hBoxLayout.setAlignment(Qt.AlignCenter)
+        self.hBoxLayout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         task_check_box.append(self.box.check_box)
 
     def set_box_enabled(self, b: bool):
@@ -49,11 +49,11 @@ class CheckBoxWithLineEdit(QFrame):
         self.box = CheckBox(check_box_title, parent=self)
         self.line_edit = LineEdit(self)
         self.line_edit.setMaximumWidth(70)
-        self.line_edit.setAlignment(Qt.AlignCenter)
+        self.line_edit.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.line_edit.setReadOnly(True)
         self.hBoxLayout.addWidget(self.box)
         self.hBoxLayout.addWidget(self.line_edit)
-        self.hBoxLayout.setAlignment(Qt.AlignCenter)
+        self.hBoxLayout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.box.toggled.connect(self.on_toggle)
 
@@ -85,9 +85,9 @@ class CheckBoxWithComboBox(QFrame):
         self.box.setFixedWidth(150)
         self.combo_box = BaseComboBox(combo_box_name, combo_box_width)
         self.combo_box.setFixedWidth(300)
-        self.hBoxLayout.addWidget(self.box, Qt.AlignLeft)
+        self.hBoxLayout.addWidget(self.box, Qt.AlignmentFlag.AlignLeft)
         self.hBoxLayout.addWidget(self.combo_box)
-        self.hBoxLayout.setAlignment(Qt.AlignCenter)
+        self.hBoxLayout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     def add_combobox(self, config_name, combo_box_width=None):
         self.additional_combo_box = BaseComboBox(config_name, combo_box_width)
@@ -129,8 +129,8 @@ class LabelWithComboBox(QFrame):
         self.layout.addWidget(self.label)
         if vbox is not True:
             self.layout.addSpacing(10)
-        self.layout.addWidget(self.combo_box, Qt.AlignLeft)
-        self.layout.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(self.combo_box, Qt.AlignmentFlag.AlignLeft)
+        self.layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setMaximumHeight(80)
         self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
 
@@ -151,9 +151,9 @@ class LabelWithSpinBox(QFrame):
         self.box = BaseSpinBox(box_name, double=double, min_value=min_value, min_step=min_step)
         self.vbox_layout.addWidget(self.label)
         self.vbox_layout.addWidget(self.box)
-        self.vbox_layout.setAlignment(Qt.AlignCenter)
+        self.vbox_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setMaximumHeight(100)
-        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
 
     def retranslateUi(self):
         self.label.label.setText(self.tr(self.text))
@@ -187,18 +187,18 @@ class MirrorTeamCombination(QFrame):
         self.box = BaseCheckBox(check_box_name, check_box_icon, check_box_title, parent=self)
         self.button = ToSettingButton(button_name, parent=self)
 
-        self.hBoxLayout.setAlignment(Qt.AlignCenter)
+        self.hBoxLayout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.team_number = team_number
 
         self.remark_name = LineEdit()
-        self.remark_name.setAlignment(Qt.AlignCenter)
+        self.remark_name.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.remark_name.setPlaceholderText("备注名")
         self.remark_name.setMaximumWidth(100)
         self.remark_name.textChanged.connect(self.remark_name_changed)
 
         self.order = LineEdit()
-        self.order.setAlignment(Qt.AlignCenter)
+        self.order.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.order.setReadOnly(True)
         self.order.setMaximumWidth(60)
 
@@ -222,7 +222,7 @@ class MirrorTeamCombination(QFrame):
         bar = BaseInfoBar.success(
             title=QT_TRANSLATE_NOOP("BaseInfoBar", '已复制到剪切板'),
             content='',
-            orient=Qt.Horizontal,
+            orient=Qt.Orientation.Horizontal,
             isClosable=True,
             position=InfoBarPosition.TOP,
             duration=500,
@@ -240,7 +240,7 @@ class MirrorTeamCombination(QFrame):
             bar = BaseInfoBar.error(
                 title=QT_TRANSLATE_NOOP("BaseInfoBar", '该设置不属于 AALC'),
                 content='',
-                orient=Qt.Horizontal,
+                orient=Qt.Orientation.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.TOP,
                 duration=500,
@@ -251,7 +251,7 @@ class MirrorTeamCombination(QFrame):
             bar = BaseInfoBar.error(
                 title=QT_TRANSLATE_NOOP("BaseInfoBar", '不是有效的 AALC 设置'),
                 content='',
-                orient=Qt.Horizontal,
+                orient=Qt.Orientation.Horizontal,
                 isClosable=True,
                 position=InfoBarPosition.TOP,
                 duration=500,
@@ -265,7 +265,7 @@ class MirrorTeamCombination(QFrame):
         bar = BaseInfoBar.success(
             title=QT_TRANSLATE_NOOP("BaseInfoBar", '已粘贴设置'),
             content='',
-            orient=Qt.Horizontal,
+            orient=Qt.Orientation.Horizontal,
             isClosable=True,
             position=InfoBarPosition.TOP,
             duration=500,
@@ -328,7 +328,7 @@ class SinnerSelect(QFrame):
         self.hBoxLayout_down = QHBoxLayout(self)
         self.box = BaseCheckBox(config_name, check_box_icon, '', parent=self)
         self.line_edit = LineEdit()
-        self.line_edit.setAlignment(Qt.AlignCenter)
+        self.line_edit.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.line_edit.setReadOnly(True)
         self.setMaximumHeight(140)
         self.vBoxLayout.setContentsMargins(5, 0, 0, 0)
@@ -354,13 +354,13 @@ class SinnerSelect(QFrame):
         pixmap = QPixmap(sinner_img)
         scaled_pixmap = pixmap.scaled(
             50, 50,
-            Qt.KeepAspectRatio,
-            Qt.SmoothTransformation
+            Qt.AspectRatioMode.KeepAspectRatio,
+            Qt.TransformationMode.SmoothTransformation
         )
         self.label_pic.setPixmap(scaled_pixmap)
         self.label_pic.setSizePolicy(
-            QSizePolicy.Fixed,  # 水平固定为 50px
-            QSizePolicy.Expanding  # 垂直填充剩余空间
+            QSizePolicy.Policy.Fixed,  # 水平固定为 50px
+            QSizePolicy.Policy.Expanding  # 垂直填充剩余空间
         )
 
         # 调整布局分配比例
@@ -368,7 +368,7 @@ class SinnerSelect(QFrame):
         self.hBoxLayout_up.addWidget(self.label_str)
         self.hBoxLayout_up.addWidget(self.label_pic)
 
-        self.hBoxLayout_down.addWidget(self.box, alignment=Qt.AlignCenter)
+        self.hBoxLayout_down.addWidget(self.box, alignment=Qt.AlignmentFlag.AlignCenter)
         self.hBoxLayout_down.addWidget(self.line_edit)
 
         self.vBoxLayout.addLayout(self.hBoxLayout_up)
@@ -394,7 +394,7 @@ class ComboBoxSettingCard(SettingCard):
         self.texts = texts
 
         self.comboBox = ComboBox(self)
-        self.hBoxLayout.addWidget(self.comboBox, 0, Qt.AlignRight)
+        self.hBoxLayout.addWidget(self.comboBox, 0, Qt.AlignmentFlag.AlignRight)
         self.hBoxLayout.addSpacing(16)
 
         for key, value in texts.items():
@@ -467,12 +467,12 @@ class PushSettingCardMirrorchyan(SettingCard):
 
         self.button2 = QPushButton("获取 CDK", self)
         self.button2.setObjectName('primaryButton')
-        self.hBoxLayout.addWidget(self.button2, 0, Qt.AlignRight)
+        self.hBoxLayout.addWidget(self.button2, 0, Qt.AlignmentFlag.AlignRight)
         self.hBoxLayout.addSpacing(10)
         self.button2.clicked.connect(self.__onclicked2)
 
         self.button = QPushButton(text, self)
-        self.hBoxLayout.addWidget(self.button, 0, Qt.AlignRight)
+        self.hBoxLayout.addWidget(self.button, 0, Qt.AlignmentFlag.AlignRight)
         self.hBoxLayout.addSpacing(16)
         self.button.clicked.connect(self.__onclicked)
 
@@ -519,7 +519,7 @@ class SwitchSettingCard(SettingCard):
         self.content = content
 
         # add switch button to layout
-        self.hBoxLayout.addWidget(self.switchButton, 0, Qt.AlignRight)
+        self.hBoxLayout.addWidget(self.switchButton, 0, Qt.AlignmentFlag.AlignRight)
         self.hBoxLayout.addSpacing(16)
 
         self.switchButton.checkedChanged.connect(self.__onCheckedChanged)
@@ -563,7 +563,7 @@ class PushSettingCardChance(BasePushSettingCard):
         super().__init__(text, icon, title, content, parent)
         self.config_name = config_name
         self.line_text = LineEdit()
-        self.line_text.setAlignment(Qt.AlignCenter)
+        self.line_text.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.line_text.setReadOnly(True)
         self.line_text.setMaximumWidth(60)
         self.line_text.setText(str(cfg.get_value(self.config_name)))

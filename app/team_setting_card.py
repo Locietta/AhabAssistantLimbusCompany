@@ -360,7 +360,7 @@ class CustomizeSettingsModule(QFrame):
         self.features_patch_line_1 = QHBoxLayout(self.features_patch_widget_1)
 
         self.star_layout = BaseSettingLayout(box_type=2, parent=self)
-        self.star_layout.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.star_layout.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.star_layout.setMaximumHeight(150)
         self.star_layout.setMaximumWidth(950)
         self.star_list = QGridLayout()
@@ -567,7 +567,7 @@ class CustomizeSettingsModule(QFrame):
         self.features_patch_line_2.addWidget(self.fixed_team_use)
         self.features_patch_line_2.addWidget(self.reward_cards)
 
-        self.fifth_line.addWidget(self.opening_items, Qt.AlignLeft)
+        self.fifth_line.addWidget(self.opening_items, Qt.AlignmentFlag.AlignLeft)
 
         self.second_system_line1.addWidget(self.second_system)
         self.second_system_line2.addSpacing(115)
@@ -587,14 +587,14 @@ class CustomizeSettingsModule(QFrame):
         self.floor_shop.addWidget(self.floor_shop_3)
         self.floor_shop.addWidget(self.floor_shop_4)
         self.floor_shop.addWidget(self.floor_shop_5)
-        self.eighth_line.addLayout(self.floor_shop, Qt.AlignLeft)
+        self.eighth_line.addLayout(self.floor_shop, Qt.AlignmentFlag.AlignLeft)
 
         self.main_layout.addWidget(self.first_line_widget)
         self.main_layout.addWidget(self.second_line_widget)
         self.main_layout.addWidget(self.third_line_widget)
         self.main_layout.addWidget(self.features_patch_widget_1)
         self.main_layout.addWidget(self.star_layout)
-        self.main_layout.addWidget(self.features_patch_widget_2, Qt.AlignLeft)
+        self.main_layout.addWidget(self.features_patch_widget_2, Qt.AlignmentFlag.AlignLeft)
         self.main_layout.addWidget(self.fourth_line_widget)
         self.main_layout.addWidget(self.fifth_line_widget)
         self.main_layout.addWidget(self.second_system_widget)

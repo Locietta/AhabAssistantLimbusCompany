@@ -289,7 +289,7 @@ class SettingInterface(ScrollArea):
         bar = BaseInfoBar.success(
             title=QT_TRANSLATE_NOOP("BaseInfoBar", '更改将在重新启动后生效'),
             content='',
-            orient=Qt.Horizontal,
+            orient=Qt.Orientation.Horizontal,
             isClosable=True,
             position=InfoBarPosition.BOTTOM_RIGHT,
             duration=5000,
@@ -300,7 +300,7 @@ class SettingInterface(ScrollArea):
         bar = BaseInfoBar.success(
             title=QT_TRANSLATE_NOOP("BaseInfoBar", '更改将在重新启动后生效'),
             content='',
-            orient=Qt.Horizontal,
+            orient=Qt.Orientation.Horizontal,
             isClosable=True,
             position=InfoBarPosition.BOTTOM_RIGHT,
             duration=5000,
